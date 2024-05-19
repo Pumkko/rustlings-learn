@@ -2,7 +2,12 @@
 //
 // Execute `rustlings hint if1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+pub fn other_bigger(a: i32, b: i32) -> i32 {
+    if a > b {
+        return a;
+    }
+    return b;
+}
 
 pub fn bigger(a: i32, b: i32) -> i32 {
     // Complete this function to return the bigger number!
@@ -10,6 +15,15 @@ pub fn bigger(a: i32, b: i32) -> i32 {
     // Do not use:
     // - another function call
     // - additional variables
+
+    // I know it's not really waht the exercise wants but i wanted to play with the language
+    return if a > b {
+        a
+    } else  if b > a{
+        b
+    } else {
+        a
+    };
 }
 
 // Don't mind this for now :)
