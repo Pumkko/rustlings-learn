@@ -2,7 +2,7 @@
 //
 // A list of scores (one per line) of a soccer match is given. Each line is of
 // the form : "<team_1_name>,<team_2_name>,<team_1_goals>,<team_2_goals>"
-// Example: England,France,4,2 (England scored 4 goals, France 2).
+// Example: FRANCE,england,4,2 (FRANCE scored 4 goals, england 2).
 //
 // You have to build a scores table containing the name of the team, the total
 // number of goals the team scored, and the total number of goals the team 
@@ -63,7 +63,7 @@ mod tests {
 
     fn get_results() -> String {
         let results = "".to_string()
-            + "England,France,4,2\n"
+            + "France,England,4,2\n"
             + "France,Italy,3,1\n"
             + "Poland,Spain,2,0\n"
             + "Germany,England,2,1\n";
@@ -86,8 +86,8 @@ mod tests {
     fn validate_team_score_1() {
         let scores = build_scores_table(get_results());
         let team = scores.get("England").unwrap();
-        assert_eq!(team.goals_scored, 5);
-        assert_eq!(team.goals_conceded, 4);
+        assert_eq!(team.goals_scored, 3);
+        assert_eq!(team.goals_conceded, 6);
     }
 
     #[test]
