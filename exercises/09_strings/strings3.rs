@@ -15,7 +15,7 @@ fn compose_me(input: &str) -> String {
     string_input.push_str(" world!");
     string_input */
 
-    //format!("{} world!", input)
+    format!("{} world!", input)
 }
 
 fn replace_me(input: &str) -> String {
