@@ -20,23 +20,43 @@
 //
 // No hints this time!
 
-// I AM NOT DONE
-
 pub enum Command {
     Uppercase,
     Trim,
     Append(usize),
 }
 
+/* 
+Not super fan of into() here, i understand that it works from context, eg 
+let f: f64 = 30.into(); 
+because f was declared as a f64, then into will turn 30 into an f64. 
+
+then for this quizz : ("hello".into(), Command::Uppercase)
+"hello" will turn into the type declared in the tuple, which is Vec<String,Command> so into() will turn "hello" into a String.
+
+I find that to be waaaaaay too unclear, I understand why they would to that in context of the quizz
+but still i find to_owned() to be much much clearer. Because it's what we are doing
+we have a borrewed string &str and we want to own it now to update it. 
+*/
 mod my_module {
     use super::Command;
 
     // TODO: Complete the function signature!
-    pub fn transformer(input: ???) -> ??? {
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {
         // TODO: Complete the output declaration!
-        let mut output: ??? = vec![];
+        let mut output: Vec<String> = vec![];
         for (string, command) in input.iter() {
             // TODO: Complete the function body. You can do it!
+            let updated_string = match command {
+                Command::Uppercase => string.to_uppercase(),
+                Command::Trim => string.trim().to_owned(),
+                Command::Append(size) => {
+                    let mut owned_string = string.to_owned();
+                    owned_string.push_str(&"bar".repeat(*size));
+                    owned_string
+                }
+            };
+            output.push(updated_string);
         }
         output
     }
@@ -45,7 +65,7 @@ mod my_module {
 #[cfg(test)]
 mod tests {
     // TODO: What do we need to import to have `transformer` in scope?
-    use ???;
+    use crate::my_module::transformer;
     use super::Command;
 
     #[test]
