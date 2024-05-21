@@ -25,6 +25,17 @@ struct Team {
     goals_conceded: u8,
 }
 
+fn update_team_score(scores: &mut HashMap<String, Team>, team_name: String, team_score: u8, opponent_score: u8) {
+    let team_entry = scores.entry(team_name).or_insert(Team {
+        goals_scored: 0,
+        goals_conceded: 0
+    });
+
+    team_entry.goals_scored += team_score;
+    team_entry.goals_conceded += opponent_score;
+
+}
+
 fn build_scores_table(results: String) -> HashMap<String, Team> {
     // The name of the team is the key and its associated struct is the value.
     let mut scores: HashMap<String, Team> = HashMap::new();
@@ -40,10 +51,12 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be the number of goals conceded by team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
+        update_team_score(&mut scores, team_1_name, team_1_score, team_2_score); 
+        update_team_score(&mut scores, team_2_name, team_2_score, team_1_score);
+
     }
     scores
 }
-
 #[cfg(test)]
 mod tests {
     use super::*;
